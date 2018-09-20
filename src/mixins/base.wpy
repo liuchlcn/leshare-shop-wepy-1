@@ -18,7 +18,7 @@
     }
     loaded() {
       this.init = true;
-      this.$apply();
+      this.$apply(); //手动调用$apply方法，才会触发脏数据检查流程的运行
       Tips.loaded();
     }
     methods = {

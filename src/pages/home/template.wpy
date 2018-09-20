@@ -4,7 +4,8 @@
     <repeat for="{{components}}" key="index" index="index" item="item">
       <!--搜索栏-->
       <block wx:if="{{item.type == 'SEARCH_BAR'}}">
-        <SearchBar :param.sync="item"/>
+        <SearchBar :param.sync="item"/> 
+        <!-- 使用.sync表示动态传值-->
       </block>
 
       <!--店铺信息-->
@@ -157,7 +158,7 @@
       const page = await await config.layout(this.pageId);
       this.renderTemplatePage(page);
       console.info(`[template] render template page success`);
-      this.loaded();
+      this.loaded(); // mixin base中的loaded方法
       // 渲染导航栏
       this.renderNavigationBar();
       // 执行触发器

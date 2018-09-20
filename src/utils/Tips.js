@@ -126,13 +126,13 @@ export default class Tips {
       return;
     }
     this.isLoading = true;
-    if (wx.showLoading) {
+    if (wx.showLoading) { // 加载提示框
       wx.showLoading({
         title: title,
         mask: true
       });
     } else {
-      wx.showNavigationBarLoading();
+      wx.showNavigationBarLoading(); // 导航条加载动画
     }
   }
 

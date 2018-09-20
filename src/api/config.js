@@ -2,16 +2,13 @@ import base from './base';
 import goods from './goods';
 import shop from './shop';
 import member from './member';
-
 export default class config extends base {
   static fieldsToCopy = {
     SWIPER: ['height'],
     IMAGE_BOX: ['heigth', 'width', 'isTitle'],
     GOODS_BOX: ['isCart', 'isPrice', 'isGoodsName', 'isSales', 'skuMode', 'isTips']
   };
-
   static discount = null;
-
   /**
    * 获取布局视图
    */
@@ -19,7 +16,6 @@ export default class config extends base {
     const url = `${this.baseUrl}/layout/pages/${pageId}`;
     return this.get(url).then(data => this._processPage(data.message));
   }
-
   /**
    * 获取店铺完整配置信息
    */
@@ -50,7 +46,6 @@ export default class config extends base {
       return config;
     });
   }
-
   // *** 数据处理方法
   /**
    * 处理页面
@@ -67,7 +62,6 @@ export default class config extends base {
       components, plugins, triggers, param
     }
   }
-
   /**
    * 处理页面的配置参数
    */
@@ -78,7 +72,6 @@ export default class config extends base {
       return JSON.parse(data);
     }
   }
-
   /**
    * 处理页面的插件与触发器
    */
@@ -99,7 +92,6 @@ export default class config extends base {
     });
     return {triggers, plugins};
   }
-
   /**
    * 处理页面的组件
    */
@@ -132,7 +124,6 @@ export default class config extends base {
         return this.copyParamToData(component);
       });
   }
-
   /**
    * 拷贝配置参数
    */

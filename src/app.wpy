@@ -1,15 +1,19 @@
+<!-- app.wpy 小程序的入口文件 -->
+<!-- 全局样式 -->
 <style lang="scss" src="./styles/weui.scss"></style>
 <style lang="scss" src="./styles/icons.scss"></style>
 <style lang="scss" src="./styles/base.scss"></style>
+
 <script>
-  import wepy from 'wepy';
+  import wepy from 'wepy'; // 导入wepy
   import WxUtils from './utils/WxUtils';
-  import 'wepy-async-function';
-  import { setStore } from 'wepy-redux'
-  import configStore from './store'
+  import 'wepy-async-function';  // 在wepy中使用async/await
+  import { setStore } from 'wepy-redux';
+  import configStore from './store';
   const store = configStore();
   setStore(store);
   export default class extends wepy.app {
+    // 定义全局数据
     globalData = {
       auth: {},
       scene: null,
@@ -49,14 +53,15 @@
       }
     };
     constructor () {
-      super();
-      // 注册中间件
-      this.use('requestfix');
-      this.use('promisify');
+      super(); // 调用父类的构造方法，新建父类的this对象
+      // 注册中间件 内置的两个中间件 
+      this.use('requestfix'); // 修复小程序请求并发问题
+      this.use('promisify'); // 使用wepy.xxx的方式请求小程序原生API都将Promise化
+      // 使用拦截器对原生API请求进行拦截
       this.intercept('request', {
         config (p) {
           p.header = this.createAuthHeader();
-          return p;
+          return p;SS
         }
       });
       this.intercept('uploadFile', {
@@ -80,6 +85,7 @@
       }
       return header;
     }
+    // 小程序的启动
     onLaunch(param) {
       // 校验SDK
       WxUtils.checkSDK();
@@ -113,6 +119,7 @@
         console.warn(`[auth]${key} sync fail `);
       }
     }
+    // 对应原生的app.json
     config = {
       pages: [
         'pages/home/template',
